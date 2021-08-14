@@ -1,0 +1,13 @@
+#WIX_ADS, #comp-k0kxi2bz {
+    display: none;
+    /*height: 0;   ****  This does not so manually go and update
+     each file
+    `var --wix-ads-height:50px;--wix-ads-top-height:50px;`
+     */
+}
+#SITE_HEADER {
+    margin-top: 0;
+}
+#SITE_HEADER-placeholder {
+    height: 0;
+}
