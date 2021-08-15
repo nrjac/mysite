@@ -2,7 +2,7 @@
 var form_id_js = "javascript_form";
 
 var data_js = {
-    "access_token": "{your access token}" // sent after you sign up
+    "access_token": "wuvjxuh4ctkw1kusgdvos67e" // sent after you sign up
 };
 
 function js_onSuccess() {
@@ -16,30 +16,35 @@ function js_onError(error) {
 }
 
 var sendButton = document.getElementById("js_send");
+var thanksMsg = document.getElementById("comp-ki310uqw");
 
 function js_send() {
+    alert("Hello ji")
     sendButton.value = 'Sending…';
     sendButton.disabled = true;
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
-            js_onSuccess();
+            thanksMsg.style.visibility = "visible";
+            sendButton.value = 'Thanks, Message submitted successfully !!';
+            // js_onSuccess();
         } else if (request.readyState == 4) {
-            js_onError(request.response);
+            alert(request.response+"\n\n Please retry again");
+            sendButton.value = 'Retry sending';
+            thanksMsg.style.visibility = "visible";
+            sendButton.disabled = false;
+            // js_onError(request.response);
         }
     };
 
-    var subject = document.querySelector("#" + form_id_js + " [name='subject']").value;
-    var message = document.querySelector("#" + form_id_js + " [name='text']").value;
-    data_js['subject'] = subject;
-    data_js['text'] = message;
+    // var subject = document.querySelector("#" + form_id_js + " [name='subject']").value;
+    // var message = document.querySelector("#" + form_id_js + " [name='text']").value;
+    data_js['subject'] = "subject";
+    data_js['text'] = "message";
     var params = toParams(data_js);
-
     request.open("POST", "https://postmail.invotes.com/send", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
     request.send(params);
-
     return false;
 }
 
